@@ -4,30 +4,82 @@
 * If the user enters the wrong credentials three times, the system must lock them out.
 * The initial balance in the bank account is $2000.
 * The system must allow users to deposit, withdraw, view, and transfer money.
-* The system must display a menu for users to perform transactions.2. 
+* The system must display a menu for users to perform transactions. 
 */
+let user = new User("admin", "admin");
+let saldo = 2000;
 
-function User () {
-    this.name = "";
-    this.passw = "";
+function User (name, passw) {
+    this.name = name;
+    this.passw = passw;
+    }
 
+function register (){
+    let name = prompt("ingrese su nombre: ");
+    let passw = prompt("ingrese su clave: ");
+        user = new User(name, passw);
+            alert("Usuario Registrado con exito");
+} 
+
+function login (){
+    let i = 0;
+    while (i <= 3) {
+        
+        let nombre = prompt("Ingrese su nombre");
+        if (nombre === user.name){
+            let clave = prompt("Ingrese su clave");
+                if (clave === user.passw) {
+                    let menuCuenta = prompt("Que desea hacer\n" + "1. Ver saldo\n" + "2. Depositar\n" + "3. Retirar\n" + "4. Transferir\n" + "5. Cerrar sesion");
+
+                    
+                                        while(true){
+                                            if (menuCuenta == "1") {
+                                                alert("Su saldo es: " + saldo);
+                                                menuCuenta = prompt("Que desea hacer\n" + "1. Ver saldo\n" + "2. Depositar\n" + "3. Retirar\n" + "4. Transferir\n" + "5. Cerrar sesion");
+                                            }else if (menuCuenta == "2") {
+                                                let saldo1 = prompt("Valor a depositar:");
+                                                saldo += parseInt(saldo1);
+                                                menuCuenta = prompt("Que desea hacer\n" + "1. Ver saldo\n" + "2. Depositar\n" + "3. Retirar\n" + "4. Transferir\n"+ "5. Cerrar sesion");
+                                                
+                                            }else if (menuCuenta == "3") {
+                                                saldo1 = prompt("Valor a Retirar:");
+                                                saldo -= parseInt(saldo1);
+                                                alert("Por favor retire el dinero de la rejilla");
+                                                menuCuenta = prompt("Que desea hacer\n" + "1. Ver saldo\n" + "2. Depositar\n" + "3. Retirar\n" + "4. Transferir\n"+ "5. Cerrar sesion");
+                                            }else if (menuCuenta == "4") {
+                                                let numCuenta = prompt("Digite nuemero de cuenta a transferir");
+                                                saldo1 = prompt("Digite valor a transferir");
+                                                saldo -= parseInt(saldo1);
+                                                menuCuenta = prompt("Que desea hacer\n" + "1. Ver saldo\n" + "2. Depositar\n" + "3. Retirar\n" + "4. Transferir\n"+ "5. Cerrar sesion");
+                                            }else if (menuCuenta == "5"){
+                                             login();   
+                                            }else{
+                                                alert("Opcion invalidad");
+                                                menuCuenta = prompt("Que desea hacer\n" + "1. Ver saldo\n" + "2. Depositar\n" + "3. Retirar\n" + "4. Transferir\n"+ "5. Cerrar sesion");
+                                                
+                                            }
+                                            
+                                    }
+                }else {
+                    alert("Clave invalida");
+                    i++
+                }
+            }else {
+                alert("usuario no existe");
+                i++
+            }
+    }
+
+alert("usuario bloqueado");
 }
 
-console.log("Bienvenido al Banco DonDarb");
-console.log ("Presione 1, para registrarse");
-console.log("Presione 2 para iniciar sesion");
+let option = prompt("Bienvenido a su Banco\n" + "presione\n" + "1. para registrarse\n" + "2. para iniciar sesion\n" + "Escoja una opcion: "); 
 
-let option = prompt("escoja una opcion: "); 
-
-    if (option == "1") {
-        let name = prompt("ingrese su nombre: ");
-        let passw = prompt("ingrese su clave: ");
-            let user = new User();
-                user.name = name;
-                user.passw = passw;
-                console.log("usuario registrado con exito");
-    }else if (opcion === "2") {
-        console.log("Iniciar sesión.");
-    } else {
+if (option == "1") {
+    register();
+    login();
+}if (option == "2") {
+        login();
+                } else {
         console.log("Opción inválida.");
     }
